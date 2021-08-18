@@ -1,0 +1,37 @@
+$totalRows: 101;
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    background-color: #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.bar-chart {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: repeat(100, 1fr);
+    grid-column-gap: 5px;
+}
+
+[class*="bar"] {
+    grid-row-start: 1;
+    grid-row-end: 101;
+    transition: all .6s ease;
+    border-radius: 5px 5px 0 0;
+    background-color: #ff4136;
+}
+
+@mixin chartValue($data) {
+  $result: $totalRows - $data;
+  grid-row-start: $result;
+}
+
+@for $i from 1 through $totalRows {
+  .bar-#{$i} {
+    @include chartValue($i);
+  }
+}
+
